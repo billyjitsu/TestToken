@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import testToken from "./utils/testToken.json";
 
 // Constants
-const CONTRACT_ADDRESS = "0x7146ea69814fEA1fe716E883b2E718fF7cDe9B58";
+const CONTRACT_ADDRESS = "0x4cF3a31Cd55585D624104aE352dec36b91042B02";
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [toMint, setToMint] = useState(0);
@@ -32,7 +32,7 @@ const App = () => {
       console.log(error);
     }
   };
-  
+
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window;
 
@@ -137,9 +137,11 @@ const App = () => {
         console.log("Going to pop wallet now to pay gas...");
         
         const air = toAirdrop.toString()
-        const air2 = (air);
+        console.log("airdrop to string:", air)
+        const air2 = air.split(',');
         console.log("array:", air2);
-        let tokenTxn = await connectedContract.airdrop([(air)]);
+       // let tokenTxn = await connectedContract.airdrop([(air)]);
+       let tokenTxn = await connectedContract.airdrop([("")]);
 
         console.log("Mining...please wait.");
         await tokenTxn.wait();
@@ -262,6 +264,7 @@ const App = () => {
             ></input>
 
             <div></div>
+            <p></p>
             <button
               onClick={askContractToFaucet}
               className="cta-button connect-wallet-button"
@@ -269,6 +272,8 @@ const App = () => {
               Faucet
             </button>
           <div></div>
+
+          <p></p>
             <button
               onClick={askContractToAirdrop}
               className="cta-button connect-wallet-button"
@@ -281,6 +286,7 @@ const App = () => {
               onChange={(s) => setToAirdrop(s.target.value)}
               placeHolder="Enter Addresses"
             ></input>
+            <p></p>
 
             <div></div>
             <button
@@ -296,6 +302,7 @@ const App = () => {
             ></input>
 
             <div></div>
+            <p></p>
             <button
               onClick={askContractToWithdraw}
               className="cta-button connect-wallet-button"
